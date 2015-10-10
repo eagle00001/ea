@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.ea.core.http.HttpTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
+com.ea.core.http.HttpTest.testHttpRequest()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at com.ea.core.http.HttpTest.testHttpRequest(HttpTest.java:16)
+
