@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="5 seconds">
 
-    <property name="log.base" value="/ea/logs/ea-app/ea-app"/>
+    <property name="log.base" value="/ea/logs/ea-core/ea-core"/>
 
     <!-- Console stdout -->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
@@ -12,6 +12,11 @@
 
     <!--#INFO Appender (Store info message, rolling with daily,The default log for 30 days) -->
     <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.base}.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
@@ -69,18 +74,20 @@
     </appender>
 
     <!--Application log is appended to the RollingFile,The default level is INFO-->
-    <logger name="com.ea" level="info" additivity="false">
+    <logger name="com.ea">
         <appender-ref ref="RollingFile"/>
+    </logger>
+
+    <!--Application log is appended to the ErrorRollingFile,The default level is ERROR-->
+    <logger name="com.ea">
         <appender-ref ref="ErrorRollingFile"/>
     </logger>
 
 
     <!--Application log is appended to the Console and TraceRollingFile，The default level is ERROR-->
-    <root level="error">
+    <root level="info">
         <appender-ref ref="stdout"/>
         <appender-ref ref="TraceRollingFile"/>
-        <appender-ref ref="RollingFile"/>
-        <appender-ref ref="ErrorRollingFile"/>
     </root>
 </configuration>
 
